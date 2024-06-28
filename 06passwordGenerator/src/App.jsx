@@ -3,43 +3,63 @@ import { useState, useCallback, useEffect, useRef } from 'react'
 
 
 function App() {
-  const [length, setLength] = useState(8)
-  const [numberAllowed, setNumberAllowed] = useState(false);
-  const [charAllowed, setCharAllowed] = useState(false)
-  const [password, setPassword] = useState("")
+  const [length, setLength] = useState(8)                          //Length state
+  const [numberAllowed, setNumberAllowed] = useState(false);      //Number state
+  const [charAllowed, setCharAllowed] = useState(false)        //Character state
+  const [password, setPassword] = useState("")            //Password state
+
 
   //useRef hook
-  const passwordRef = useRef(null)
+  const passwordRef = useRef(null)                //Ref to store the password
 
-  const passwordGenerator = useCallback(() => {
+  //it is used to store the reference of the element in the DOM
+
+  //Password generator function
+  const passwordGenerator = useCallback(() => {          //Callback function
     let pass = ""
-    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    if (numberAllowed) str += "0123456789"
-    if (charAllowed) str += "!@#$%^&*-_+=[]{}~`"
+    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"  //String of characters
+    if (numberAllowed) str += "0123456789"                            //If numberAllowed is true, add numbers to the string
+    if (charAllowed) str += "!@#$%^&*-_+=[]{}~`"                       //If charAllowed is true, add special characters to the string
 
-    for (let i = 1; i <= length; i++) {
-      let char = Math.floor(Math.random() * str.length + 1)
-      pass += str.charAt(char)
+    for (let i = 1; i <= length; i++) {                                 //Loop to generate password
+      let char = Math.floor(Math.random() * str.length + 1)             //Random number to select a character from the string
+      pass += str.charAt(char)                                  //Add the selected character to the password
       
     }
 
-    setPassword(pass)
+    setPassword(pass)      //Set the password
 
 
-  }, [length, numberAllowed, charAllowed, setPassword])
+  }, [length, numberAllowed, charAllowed, setPassword])  //Callback dependencies in array it optimizes the function 
 
-  const copyPasswordToClipboard = useCallback(() => {
-    passwordRef.current?.select();
-    passwordRef.current?.setSelectionRange(0, 999);
-    window.navigator.clipboard.writeText(password)
-  }, [password])
 
-  useEffect(() => {
-    passwordGenerator()
-  }, [length, numberAllowed, charAllowed, passwordGenerator])
+
+//Copy password to clipboard
+  const copyPasswordToClipboard = useCallback(() => {         //Callback function to copy password to clipboard
+    passwordRef.current?.select();                        //Select the password
+    
+    passwordRef.current?.setSelectionRange(0, 999);       //Set the selection range
+    window.navigator.clipboard.writeText(password)        //Copy the password to clipboard
+    .then(() => {
+      alert('Password copied to clipboard successfully!');    //Alert message
+    })
+    .catch(err => {
+      alert('Failed to copy the password: ' + err);
+    });
+    
+  }, [password])                              //Callback dependencies
+
+
+
+  //useEffect hook
+  useEffect(() => {           //useEffect hook to generate password
+    passwordGenerator()         //Call the passwordGenerator function
+  }, [length, numberAllowed, charAllowed, passwordGenerator])   //if any change in these dependencies, the useEffect hook will run
+
+
   return (
     
-    <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-800 text-orange-500">
+    <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-800 text-orange-500">     
       <h1 className='text-white text-center my-3'>Password Generator</h1>
     <div className="flex shadow rounded-lg overflow-hidden mb-4">
         <input
@@ -63,18 +83,18 @@ function App() {
         min={6}
         max={100}
         value={length}
-         className='cursor-pointer'
-         onChange={(e) => {setLength(e.target.value)}}
+         className='cursor-pointer'             //Range input to set the length of the password
+         onChange={(e) => {setLength(e.target.value)}}   //Set the length of the password
           />
-          <label>Length: {length}</label>
+          <label>Length: {length}</label>         
       </div>
       <div className="flex items-center gap-x-1">
       <input
           type="checkbox"
           defaultChecked={numberAllowed}
           id="numberInput"
-          onChange={() => {
-              setNumberAllowed((prev) => !prev);
+          onChange={() => {            //Checkbox to allow numbers in the password
+              setNumberAllowed((prev) => !prev);      //Toggle the numberAllowed state
           }}
       />
       <label htmlFor="numberInput">Numbers</label>
@@ -84,8 +104,8 @@ function App() {
               type="checkbox"
               defaultChecked={charAllowed}
               id="characterInput"
-              onChange={() => {
-                  setCharAllowed((prev) => !prev )
+              onChange={() => {                 //Toggle the charAllowed state
+                  setCharAllowed((prev) => !prev ) //Checkbox to allow special characters in the password
               }}
           />
           <label htmlFor="characterInput">Characters</label>

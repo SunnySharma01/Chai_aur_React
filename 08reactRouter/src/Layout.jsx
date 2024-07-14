@@ -8,7 +8,7 @@ function Layout() {
     <>
     <Header/>
     <Outlet />   {/* Outlet is a placeholder for the child routes */}
-    <Footer />   // Footer component
+    <Footer />    {/*Footer component */}
     </>
   )
 }

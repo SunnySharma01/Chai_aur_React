@@ -1,5 +1,8 @@
 import React from 'react'
-import {Link, NavLink} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'            // Link and NavLink
+
+
+// Link provides a basic link to any URL, while NavLink offers additional capabilities that can enhance your user experience.
 
 export default function Header() {
     return (
@@ -35,7 +38,7 @@ export default function Header() {
                             <li>
                                 <NavLink
                                 to="/"
-                                    className={({isActive}) =>
+                                    className={({isActive}) =>  // isActive is a boolean value that tells us if the link is active or not
                                         `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                                     }
                                 >

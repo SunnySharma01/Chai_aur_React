@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';    // Import the Link component
 
 export default function Footer() {
     return (
@@ -7,7 +7,7 @@ export default function Footer() {
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between">
                     <div className="mb-6 md:mb-0">
-                        <Link to="/" className="flex items-center">
+                        <Link to="/" className="flex items-center">  {/* Use the Link component */}
                             <img
                                 src="https://alexharkness.com/wp-content/uploads/2020/06/logo-2.png"
                                 className="mr-3 h-16"
@@ -45,7 +45,7 @@ export default function Footer() {
                                     </a>
                                 </li>
                                 <li>
-                                    <Link to="/" className="hover:underline">
+                                    <Link to="/" className="hover:underline">   {/* Use the Link component */}
                                         Discord
                                     </Link>
                                 </li>

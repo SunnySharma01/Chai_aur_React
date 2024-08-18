@@ -8,7 +8,7 @@ function App() {
   
 
   return (
-    <UserContextProvider>
+    <UserContextProvider>          {/*Wrap the components with the provider*/}
       <h1>React with Chai and share is important</h1>
       <Login />
       <Profile />

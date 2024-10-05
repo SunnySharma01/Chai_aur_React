@@ -3,9 +3,9 @@ import useTheme from '../contexts/theme';
 
 export default function ThemeBtn() {
     
-    const {themeMode, lightTheme, darkTheme} = useTheme()
+    const {themeMode, lightTheme, darkTheme} = useTheme()         // get the themeMode, lightTheme, darkTheme from the context
     const onChangeBtn = (e) => {
-        const darkModeStatus = e.currentTarget.checked
+        const darkModeStatus = e.currentTarget.checked            // get the status of the checkbox
         if (darkModeStatus) {
             darkTheme()
         } else {

@@ -4,7 +4,8 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
+  darkMode: "class",     // Enable dark mode for this project on basic of class, not media query
+ theme: {
     extend: {},
   },
   plugins: [],

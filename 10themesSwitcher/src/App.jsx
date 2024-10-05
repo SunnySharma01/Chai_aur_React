@@ -6,21 +6,21 @@ import ThemeBtn from './components/ThemeBtn'
 import Card from './components/Card'
 
 function App() {
-  const [themeMode, setThemeMode] = useState("light")
+  const [themeMode, setThemeMode] = useState("light")   // default theme is light
 
-  const lightTheme = () => {
+  const lightTheme = () => {            // function to change theme to light
     setThemeMode("light")
   }
 
-  const darkTheme = () => {
+  const darkTheme = () => {       // function to change theme to dark
     setThemeMode("dark")
   }
 
   // actual change in theme
 
   useEffect(() => {
-    document.querySelector('html').classList.remove("light", "dark")
-    document.querySelector('html').classList.add(themeMode)
+    document.querySelector('html').classList.remove("light", "dark")     // remove both classes
+    document.querySelector('html').classList.add(themeMode)              // add the selected theme class
   }, [themeMode])
   
 
